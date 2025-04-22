@@ -49,9 +49,9 @@ def GUI_loop():
         emoji_input.clear()
         return
 
+    ##Need to add error handling for if the user enters too many emoji
     #THIS IS THE METHOD OF MAIN WHICH CONNECTS TO THE REST OF THE PIPELINE
     def submit_click():
-        # other function calls will go here
         text_var.set("SUBMITTED")
         print("Submitted emoji input:", emoji_input)
 
@@ -59,6 +59,17 @@ def GUI_loop():
         keyboard.pack_forget()
         bottom_buttons.pack_forget()
         output.pack_forget()
+        instruction_label.pack_forget()
+
+        #turning the list of emojis back into short_text for use on the back end
+        emoji_strings = []
+        for e in emoji_input:
+            short_text = emoji.demojize(e)
+            emoji_strings.append(short_text)
+        #the print statement is purely to test
+        print(emoji_strings)
+
+        # other function calls will go here
 
         #reveal results frame!
         results_frame.pack(fill="both", expand=True)
@@ -69,8 +80,12 @@ def GUI_loop():
     f1 = tk.Frame(root, background = bg_color)
     f1.pack(fill="both", expand=True, padx=20, pady=20)
 
-    display = tk.Frame(f1)
+    display = tk.Frame(f1, background=bg_color)
     display.pack(side = "top", fill = "x")
+
+    book_emoji = emoji.emojize(":open_book:")
+    instruction_label = tk.Label(f1, text=f'Enter up to 5 emoji, then hit Submit to get a {book_emoji}', font=("Arial", 18, "bold"), bg="white", fg="black")
+    instruction_label.pack(pady=(10, 0))
 
     output = tk.Label(root,
                  textvariable=text_var,
@@ -90,23 +105,27 @@ def GUI_loop():
                  wraplength=250)
     output.pack(padx=10, pady=10)
 
-    keyboard = tk.Frame(f1, background = bg_color)
-    keyboard.pack(fill="both", expand=True)
-
-    bottom_buttons = tk.Frame(f1)
+    bottom_buttons = tk.Frame(f1, background = bg_color)
     bottom_buttons.pack(side="bottom", padx=10)
 
-    clear_btn = tk.Button(bottom_buttons, text="Clear", font=("", font_size + 2, "bold"), width=20, height=2, command=lambda: clear_click())
+    clear_btn = tk.Button(bottom_buttons, text="Clear", font=("", font_size + 2, "bold"), width=20, height=2, cursor="hand2", command=lambda: clear_click())
     clear_btn.pack(side="left", padx=10)
-    submit_btn = tk.Button(bottom_buttons, text="Find a book!", font=("", font_size + 2, "bold"), width=20, height=2, command=lambda: submit_click())
+    submit_btn = tk.Button(bottom_buttons, text="Submit!", font=("", font_size + 2, "bold"), width=20, height=2, cursor="hand2", command=lambda: submit_click())
     submit_btn.pack(side="right", padx=10)
+
+    keyboard = tk.Frame(f1, background = bg_color)
+    keyboard.pack(fill="both", expand=True, pady=10)
+
+    #frame within keyboard frame (using to center the keys)
+    center_frame = tk.Frame(keyboard, background=bg_color)
+    center_frame.place(relx=0.5, rely=0.5, anchor="center")  # this centers it
 
     for i, name in enumerate(emoji_names):
         try:
             e = emoji.emojize(f":{name}:", language="alias")
         except:
             e = name  # if the emoji name is not found
-        btn = tk.Button(keyboard, text=e, font=("", font_size), width=4, height=2, command=lambda emoji_name=e: keyboard_click(emoji_name))
+        btn = tk.Button(center_frame, text=e, font=("", font_size), width=4, height=2, command=lambda emoji_name=e: keyboard_click(emoji_name))
         btn.grid(row=i // 12, column=i % 12)
 
     results_frame = tk.Frame(f1, background="white")
