@@ -1,5 +1,122 @@
-def main():
-    pass
+import emoji
+import tkinter as tk
+
+def GUI_loop():
+    # main ideas from https://www.youtube.com/watch?v=8Tlqb14NvY8
+
+    emoji_names = [
+        "grinning_face", "face_with_tears_of_joy", "upside-down_face", "winking_face", "smiling_face_with_hearts",
+        "smiling_face_with_heart-eyes", "star-struck", "smiling_face_with_tear", "winking_face_with_tongue",
+        "face_with_peeking_eye", "thinking_face", "shaking_face", "cowboy_hat_face", "smiling_face_with_sunglasses",
+        "nerd_face", "astonished_face", "flushed_face", "crying_face", "face_screaming_in_fear", "disappointed_face",
+        "enraged_face", "smiling_face_with_horns", "skull", "ghost", "alien", "broken_heart", "red_heart",
+        "raised_fist", "folded_hands", "collision", "nail_polish", "flexed_biceps", "child", "person", "old_woman",
+        "health_worker", "student", "teacher", "judge", "farmer", "cook", "mechanic", "scientist", "technologist",
+        "singer", "artist", "astronaut", "firefighter", "police_officer", "detective", "construction_worker",
+        "person_in_tuxedo", "Santa_Claus", "superhero", "supervillain", "mage", "fairy", "vampire", "zombie",
+        "person_running", "woman_dancing", "person_in_suit_levitating", "kiss", "family", "dog_face", "cat_face",
+        "horse_face", "bear", "paw_prints", "hatching_chick", "dragon_face", "T-Rex", "fish", "hot_beverage",
+        "wine_glass", "fork_and_knife", "world_map", "desert_island", "mount_fuji", "camping", "classical_building",
+        "stadium", "house", "office_building", "school", "castle", "night_with_stars", "automobile",
+        "manual_wheelchair", "sailboat", "airplane", "rocket", "rainbow", "umbrella_with_rain_drops",
+        "snowman_without_snow", "water_wave", "trophy", "water_pistol", "performing_arts", "necktie", "crown",
+        "high-heeled_shoe", "musical_note", "magnifying_glass_tilted_left", "crossed_swords", "place_of_worship",
+        "rainbow_flag", "pirate_flag"
+    ]
+
+    root = tk.Tk()
+    root.title("Emoji Keyboard")
+    root.geometry("1200x800")
+    font_size = 20
+    bg_color = '#FF8FAB'
+
+    #this is the list that will be sent to the other functions
+    emoji_input = []
+    text_var = tk.StringVar(value = "")
+    results_var = tk.StringVar(value = "RESULTS")
+
+    #on_click functions
+    def keyboard_click(emoji_name):
+        current_display = text_var.get()
+        text_var.set(current_display + emoji_name)
+
+        emoji_input.append(emoji_name)
+
+        return
+
+    def clear_click():
+        text_var.set(" ")
+        emoji_input.clear()
+        return
+
+    #THIS IS THE METHOD OF MAIN WHICH CONNECTS TO THE REST OF THE PIPELINE
+    def submit_click():
+        # other function calls will go here
+        text_var.set("SUBMITTED")
+        print("Submitted emoji input:", emoji_input)
+
+        #stop further input
+        keyboard.pack_forget()
+        bottom_buttons.pack_forget()
+        output.pack_forget()
+
+        #reveal results frame!
+        results_frame.pack(fill="both", expand=True)
+        results_label.config(text=f"Results for: {' '.join(emoji_input)}")
+
+
+#SETTING UP KEYBOARD GUI
+    f1 = tk.Frame(root, background = bg_color)
+    f1.pack(fill="both", expand=True, padx=20, pady=20)
+
+    display = tk.Frame(f1)
+    display.pack(side = "top", fill = "x")
+
+    output = tk.Label(root,
+                 textvariable=text_var,
+                 anchor='n',
+                 bg="white",
+                 height=3,
+                 width=30,
+                 bd=3,
+                 font=("Arial", 16, "bold"),
+                 cursor="hand2",
+                 fg="red",
+                 padx=15,
+                 pady=15,
+                 justify=tk.CENTER,
+                 relief=tk.RAISED,
+                 underline=0,
+                 wraplength=250)
+    output.pack(padx=10, pady=10)
+
+    keyboard = tk.Frame(f1, background = bg_color)
+    keyboard.pack(fill="both", expand=True)
+
+    bottom_buttons = tk.Frame(f1)
+    bottom_buttons.pack(side="bottom", padx=10)
+
+    clear_btn = tk.Button(bottom_buttons, text="Clear", font=("", font_size + 2, "bold"), width=20, height=2, command=lambda: clear_click())
+    clear_btn.pack(side="left", padx=10)
+    submit_btn = tk.Button(bottom_buttons, text="Find a book!", font=("", font_size + 2, "bold"), width=20, height=2, command=lambda: submit_click())
+    submit_btn.pack(side="right", padx=10)
+
+    for i, name in enumerate(emoji_names):
+        try:
+            e = emoji.emojize(f":{name}:", language="alias")
+        except:
+            e = name  # if the emoji name is not found
+        btn = tk.Button(keyboard, text=e, font=("", font_size), width=4, height=2, command=lambda emoji_name=e: keyboard_click(emoji_name))
+        btn.grid(row=i // 12, column=i % 12)
+
+    results_frame = tk.Frame(f1, background="white")
+    results_label = tk.Label(results_frame, text=results_var, font=("Arial", 24), bg="white")
+    results_label.pack(pady=30)
+
+#MAIN LOOP STARTS HERE
+    root.mainloop()
+
 
 if __name__ == "__main__":
-    main()
+
+    GUI_loop()
