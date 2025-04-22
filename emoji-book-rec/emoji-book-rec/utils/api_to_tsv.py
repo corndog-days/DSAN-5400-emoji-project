@@ -29,7 +29,14 @@ class BookAPI:
         """Fetch data from Google Books API."""
         params = {"q": query}
         response = requests.get(self.google_books_url, params = params)
-        data = response.json()
+        if not response.text.strip():
+            print(f"Empty response for query '{query}'. Skipping.")
+            return []
+        try: 
+            data = response.json()
+        except requests.exceptions.JSONDecodeError as e:
+            print(f"Error decoding JSON for query '{query}': {e}")
+            return []
 
         books = []
         if "items" in data:
@@ -54,7 +61,15 @@ class BookAPI:
         """Fetch data from Open Library API."""
         params = {"q": query}
         response = requests.get(self.open_library_url, params=params)
-        data = response.json()
+
+        if not response.text.strip():
+            print(f"Empty response for query '{query}'. Skipping.")
+            return []
+        try: 
+            data = response.json()
+        except requests.exceptions.JSONDecodeError as e:
+            print(f"Error decoding JSON for query '{query}': {e}")
+            return []
 
         books = []
         if "docs" in data:
@@ -81,10 +96,16 @@ class BookAPI:
         "output": "json"
     }
         response = requests.get(self.iarchive_url,params=params)
+        if not response.text.strip():
+            print(f"Empty response for query '{query}'. Skipping.")
+            return []
+        try: 
+            data = response.json()
+        except requests.exceptions.JSONDecodeError as e:
+            print(f"Error decoding JSON for query '{query}': {e}")
+            return []
 
-
-        data = response.json()
-        print(data)
+        #print(data)
         books = []
 
         if "response" in data and "docs" in data["response"]:
