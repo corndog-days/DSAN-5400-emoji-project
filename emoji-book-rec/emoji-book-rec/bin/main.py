@@ -1,6 +1,6 @@
 import emoji
 import tkinter as tk
-from query import process_query
+#from query import process_query
 
 def main():
     # main ideas from https://www.youtube.com/watch?v=8Tlqb14NvY8
@@ -75,7 +75,7 @@ def main():
 
         # other function calls will go here
 
-        book_recs = process_query(emoji_strings, filepath)
+        #book_recs = process_query(emoji_strings, filepath)
 
         #put the top 3 recs into the results frame
 
@@ -143,6 +143,7 @@ def main():
 #MAIN LOOP STARTS HERE
     root.mainloop()
 
+    return
 
 if __name__ == "__main__":
 
