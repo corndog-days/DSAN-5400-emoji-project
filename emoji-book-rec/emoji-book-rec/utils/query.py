@@ -1,14 +1,21 @@
 from collections import Counter
+from keyword_tsv_to_dict import generate_keyword_dict
 # from emoji-book-rec.emoji-book-rec.utils.index import create_index
 # TODO: Fix import statement once we rename the folder
 
-def process_query(query, emoji_kw_dict, books):
+def process_query(query, filepath):
 	"""
 	:param query: List of emoji queries from user in Unicode
-	:param emoji_kw_dict: Dictionary of emojis and associated keywords
-	:param books: List of Results objects
+	:param filepath: File path for emoji keyword list
 	:return: Sorted dictionary of book titles
 	"""
+
+	#emoji_kw_dict: Dictionary of emojis and associated keywords
+	generate_keyword_dict(filepath)
+
+	#books: List of Book objects -- CHANGING THIS TO ITERATING THROUGH FILE
+
+
 	kw_book_index = create_index(books, emoji_kw_dict)  # build index
 
 	query_keywords = []
