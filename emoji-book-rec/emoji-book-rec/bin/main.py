@@ -72,16 +72,21 @@ def main():
         #the print statement is purely to test
         print(emoji_strings)
 
-        # other function calls will go here
-        book_recs = [4, 5, 6]
-        #book_recs = process_query(emoji_strings, filepath)
+        # process_query returns a full sorted dictionary
+        # key=book title, value=book relevance score
+        book_recs = process_query(emoji_strings, filepath)
+
+        key_iter = iter(book_recs)
+        book1 = next(key_iter, None)
+        book2 = next(key_iter, None)
+        book3 = next(key_iter, None)
 
         #reveal results frame!
         results_frame.pack(fill="both", expand=True)
         results_label_header.config(text=f"Top 3 books recommended for: {' '.join(emoji_input)}")
-        results_label1.config(text=f"Book 1: {book_recs[0]}")
-        results_label2.config(text=f"Book 2: {book_recs[1]}")
-        results_label3.config(text=f"Book 3: {book_recs[2]}")
+        results_label1.config(text=f"Book 1: {book1}")
+        results_label2.config(text=f"Book 2: {book2}")
+        results_label3.config(text=f"Book 3: {book3}")
 
 
 #SETTING UP KEYBOARD GUI
