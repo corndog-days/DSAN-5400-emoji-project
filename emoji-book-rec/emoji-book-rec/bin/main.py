@@ -1,7 +1,8 @@
 import emoji
 import tkinter as tk
+from query import process_query
 
-def GUI_loop():
+def main():
     # main ideas from https://www.youtube.com/watch?v=8Tlqb14NvY8
 
     emoji_names = [
@@ -34,6 +35,9 @@ def GUI_loop():
     emoji_input = []
     text_var = tk.StringVar(value = "")
     results_var = tk.StringVar(value = "RESULTS")
+
+    #CHANGE THIS TO A COMMAND LINE ARG
+    filepath = "/Users/isabelle/PycharmProjects/DSAN-5400-emoji-project/emoji-book-rec/data/emoji_keyword_list.tsv"
 
     #on_click functions
     def keyboard_click(emoji_name):
@@ -70,6 +74,10 @@ def GUI_loop():
         print(emoji_strings)
 
         # other function calls will go here
+
+        book_recs = process_query(emoji_strings, filepath)
+
+        #put the top 3 recs into the results frame
 
         #reveal results frame!
         results_frame.pack(fill="both", expand=True)
@@ -138,4 +146,4 @@ def GUI_loop():
 
 if __name__ == "__main__":
 
-    GUI_loop()
+    main()
