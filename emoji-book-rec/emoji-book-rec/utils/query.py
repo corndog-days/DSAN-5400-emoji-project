@@ -36,10 +36,10 @@ def process_query(query, filepath, use_precomputed=True, matrix_path=None):
 		matrix_df = pd.read_csv(matrix_path, sep='\t', index_col=0)
 
 		book_scores = {}
-		for kw, multiplier in keyword_counts.items():
+		for kw, count in keyword_counts.items():
 			if kw in matrix_df.index:
 				for book_title, freq in matrix_df.loc[kw].items():
-					book_scores[book_title] = book_scores.get(book_title, 0) + freq * multiplier
+					book_scores[book_title] = book_scores.get(book_title, 0) + freq * count
 
 		return sorted(book_scores.items(), key=lambda x: x[1], reverse=True)
 
