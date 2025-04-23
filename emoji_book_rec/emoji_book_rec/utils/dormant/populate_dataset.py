@@ -3,7 +3,7 @@ import emoji
 from api_to_tsv import BookAPI
 import csv
 
-def load_emoji_keyword_dict(path = "emoji-book-rec/data/emoji_keyword_list.tsv"):
+def load_emoji_keyword_dict(path = "emoji_book_rec/data/emoji_keyword_list.tsv"):
     """
     Loads emoji-keyword mappings from a TSV file.
     :return: Dict[str, List[str]]
@@ -21,7 +21,7 @@ def load_emoji_keyword_dict(path = "emoji-book-rec/data/emoji_keyword_list.tsv")
 
     return emoji_kw_dict
 
-def populate_dataset(emoji_kw_tsv_path="emoji-book-rec/data/emoji_keyword_list.tsv", output_path="emoji-book-rec/data/books_data.tsv"):
+def populate_dataset(emoji_kw_tsv_path="emoji_book_rec/data/emoji_keyword_list.tsv", output_path="emoji_book_rec/data/books_data.tsv"):
     emoji_kw_dict = load_emoji_keyword_dict(emoji_kw_tsv_path)
     book_api = BookAPI()
 

@@ -1,6 +1,7 @@
 import emoji
 import tkinter as tk
-#from query import process_query
+from ..utils.query import process_query
+import argparse
 
 def main():
     # main ideas from https://www.youtube.com/watch?v=8Tlqb14NvY8
@@ -35,8 +36,17 @@ def main():
     emoji_input = []
     text_var = tk.StringVar(value = "")
 
-    #CHANGE THIS TO A COMMAND LINE ARG
-    filepath = "/Users/isabelle/PycharmProjects/DSAN-5400-emoji-project/emoji-book-rec/data/emoji_keyword_list.tsv"
+    # Create the parser
+    parser = argparse.ArgumentParser(description="Process the emoji keyword list file.")
+
+    # Add the filepath argument
+    parser.add_argument('--filepath', type=str, help="Path to the emoji keyword list file.")
+
+    # Parse the arguments
+    args = parser.parse_args()
+
+    # Now you can use args.filepath as the filepath variable
+    filepath = args.filepath
 
     #on_click functions
     def keyboard_click(emoji_name):

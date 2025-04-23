@@ -11,7 +11,7 @@ def get_synonyms(word):
     return synonyms
 
 # Load the emoji-keyword mapping
-emoji_keywords_df = pd.read_csv('emoji-book-rec/data/emoji_keyword_list.tsv', sep='\t')
+emoji_keywords_df = pd.read_csv('emoji_book_rec/data/emoji_keyword_list.tsv', sep='\t')
 keywords = set()
 for _, row in emoji_keywords_df.iterrows():
     for kw in row[1:]:
@@ -19,7 +19,7 @@ for _, row in emoji_keywords_df.iterrows():
 keywords = sorted(keywords)
 
 # Load the books data
-books_df = pd.read_csv('emoji-book-rec/data/books_data.tsv', sep='\t')
+books_df = pd.read_csv('emoji_book_rec/data/books_data.tsv', sep='\t')
 books = books_df['title'].tolist()
 
 # Initialize the 2D array
@@ -42,4 +42,4 @@ for i, kw in enumerate(keywords):
 result_df = pd.DataFrame(keyword_matrix, index=keywords, columns=books)
 
 # Save to file
-result_df.to_csv('emoji-book-rec/data/keyword_book_matrix.tsv', sep='\t')
+result_df.to_csv('emoji_book_rec/data/keyword_book_matrix.tsv', sep='\t')
