@@ -4,7 +4,7 @@ from keyword_tsv_to_dict import generate_keyword_dict
 # from emoji-book-rec.emoji-book-rec.utils.index import create_index
 # TODO: Fix import statement once we rename the folder
 
-def process_query(query, filepath, use_precomputed=False, matrix_path=None):
+def process_query(query, filepath, use_precomputed=True, matrix_path=None):
 	"""
 	:param query: List of emoji queries from user in Unicode
 	:param filepath: File path for emoji keyword list
