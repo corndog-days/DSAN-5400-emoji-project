@@ -8,6 +8,8 @@ def process_query(query, filepath, use_precomputed=False, matrix_path=None):
 	"""
 	:param query: List of emoji queries from user in Unicode
 	:param filepath: File path for emoji keyword list
+	:param use_precomputed: If True, use a precomputed keyword-book matrix
+    :param matrix_path: Required if use_precomputed=True; path to the TSV matrix
 	:return: Sorted dictionary of book titles
 	"""
 
