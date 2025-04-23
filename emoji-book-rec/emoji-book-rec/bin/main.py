@@ -34,7 +34,6 @@ def main():
     #this is the list that will be sent to the other functions
     emoji_input = []
     text_var = tk.StringVar(value = "")
-    results_var = tk.StringVar(value = "RESULTS")
 
     #CHANGE THIS TO A COMMAND LINE ARG
     filepath = "/Users/isabelle/PycharmProjects/DSAN-5400-emoji-project/emoji-book-rec/data/emoji_keyword_list.tsv"
@@ -74,14 +73,15 @@ def main():
         print(emoji_strings)
 
         # other function calls will go here
-
+        book_recs = [4, 5, 6]
         #book_recs = process_query(emoji_strings, filepath)
-
-        #put the top 3 recs into the results frame
 
         #reveal results frame!
         results_frame.pack(fill="both", expand=True)
-        results_label.config(text=f"Results for: {' '.join(emoji_input)}")
+        results_label_header.config(text=f"Top 3 books recommended for: {' '.join(emoji_input)}")
+        results_label1.config(text=f"Book 1: {book_recs[0]}")
+        results_label2.config(text=f"Book 2: {book_recs[1]}")
+        results_label3.config(text=f"Book 3: {book_recs[2]}")
 
 
 #SETTING UP KEYBOARD GUI
@@ -136,9 +136,17 @@ def main():
         btn = tk.Button(center_frame, text=e, font=("", font_size), width=4, height=2, command=lambda emoji_name=e: keyboard_click(emoji_name))
         btn.grid(row=i // 12, column=i % 12)
 
+    #setting up results page
     results_frame = tk.Frame(f1, background="white")
-    results_label = tk.Label(results_frame, text=results_var, font=("Arial", 24), bg="white")
-    results_label.pack(pady=30)
+    results_label_header = tk.Label(results_frame, text="RESULTS", font=("Arial", 24), bg="white")
+    results_label1 = tk.Label(results_frame, text="Book 1", font=("Arial", 24), bg="white")
+    results_label2 = tk.Label(results_frame, text="Book 2", font=("Arial", 24), bg="white")
+    results_label3 = tk.Label(results_frame, text="Book 3", font=("Arial", 24), bg="white")
+    #packing all four labels
+    results_label_header.pack(pady=30)
+    results_label1.pack(pady=10)
+    results_label2.pack(pady=10)
+    results_label3.pack(pady=10)
 
 #MAIN LOOP STARTS HERE
     root.mainloop()
