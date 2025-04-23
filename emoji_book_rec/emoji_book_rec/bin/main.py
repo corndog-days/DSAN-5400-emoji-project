@@ -71,9 +71,10 @@ def main():
         emoji_strings = []
         for e in emoji_input:
             short_text = emoji.demojize(e)
-            emoji_strings.append(short_text)
+            #remove colons on either side
+            emoji_strings.append(short_text[1:-1])
         #the print statement is purely to test
-        print(emoji_strings)
+        #print(emoji_strings)
 
         # process_query returns a full sorted dictionary
         # key=book title, value=book relevance score

@@ -21,7 +21,7 @@ def process_query(query, filepath, use_precomputed=True, matrix_path=None):
 
     # emoji_kw_dict: Dictionary of emojis and associated keywords
     emoji_kw_dict = generate_keyword_dict(filepath)
-    print(emoji_kw_dict)
+
     # book index
     #kw_book_index = create_index(books, emoji_kw_dict)  # build index
 
@@ -35,6 +35,7 @@ def process_query(query, filepath, use_precomputed=True, matrix_path=None):
     keyword_counts = Counter(query_keywords)
 
     # ----------------New logic----------------
+    print(query_keywords)
     print(keyword_counts)
 
     if use_precomputed:
@@ -53,11 +54,17 @@ def process_query(query, filepath, use_precomputed=True, matrix_path=None):
             if kw in matrix_df.index:
 
                 for book_title, freq in matrix_df.loc[kw].items():
-                    book_scores[book_title] = book_scores.get(book_title, 0) + freq * multiplier
-
+                    #book_scores[book_title] = book_scores.get(book_title, 0) + freq * multiplier
                     book_scores[book_title] = book_scores.get(book_title, 0) + freq * count
 
+
+        for i, (key, value) in enumerate(sorted(book_scores.items(), key=lambda x: x[1], reverse=True)):
+            if i >= 25:
+                break
+            print(f"Key: {key}, Value: {value}")
+
         return sorted(book_scores.items(), key=lambda x: x[1], reverse=True)
+
 
     # ----------------End of new logic----------------
 
