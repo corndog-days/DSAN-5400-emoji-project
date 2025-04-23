@@ -23,7 +23,7 @@ def process_query(query, filepath, use_precomputed=True, matrix_path=None):
     emoji_kw_dict = generate_keyword_dict(filepath)
 
     # book index
-    kw_book_index = create_index(books, emoji_kw_dict)  # build index
+    #kw_book_index = create_index(books, emoji_kw_dict)  # build index
 
     query_keywords = []
 

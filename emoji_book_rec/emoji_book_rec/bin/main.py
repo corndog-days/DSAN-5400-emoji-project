@@ -84,7 +84,7 @@ def main():
 
         # process_query returns a full sorted dictionary
         # key=book title, value=book relevance score
-        book_recs = process_query(emoji_strings, filepath)
+        book_recs = process_query(emoji_strings, filepath, True, "/Users/isabelle/PycharmProjects/DSAN-5400-emoji-project/emoji_book_rec/data/keyword_book_matrix.tsv")
 
         key_iter = iter(book_recs)
         book1 = next(key_iter, None)
