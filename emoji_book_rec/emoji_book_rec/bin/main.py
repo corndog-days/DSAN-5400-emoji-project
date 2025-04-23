@@ -2,6 +2,7 @@ import emoji
 import tkinter as tk
 from ..utils.query import process_query
 import argparse
+import os
 
 def main():
     # main ideas from https://www.youtube.com/watch?v=8Tlqb14NvY8
@@ -36,7 +37,9 @@ def main():
     emoji_input = []
     text_var = tk.StringVar(value = "")
 
-    filepath = "/emoji_book_rec/data/emoji_keyword_list.tsv"
+    current_dir = os.path.dirname(__file__)  # .../emoji_book_rec/emoji_book_rec/utils/
+    two_up = os.path.dirname(os.path.dirname(current_dir))  # .../emoji_book_rec/
+    filepath = os.path.join(two_up, "data", "emoji_keyword_list.tsv")
 
     #on_click functions
     def keyboard_click(emoji_name):
