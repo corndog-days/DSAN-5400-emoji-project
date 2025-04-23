@@ -36,17 +36,7 @@ def main():
     emoji_input = []
     text_var = tk.StringVar(value = "")
 
-    # Create the parser
-    parser = argparse.ArgumentParser(description="Process the emoji keyword list file.")
-
-    # Add the filepath argument
-    parser.add_argument('--filepath', type=str, help="Path to the emoji keyword list file.")
-
-    # Parse the arguments
-    args = parser.parse_args()
-
-    # Now you can use args.filepath as the filepath variable
-    filepath = args.filepath
+    filepath = "/emoji_book_rec/data/emoji_keyword_list.tsv"
 
     #on_click functions
     def keyboard_click(emoji_name):
@@ -84,7 +74,7 @@ def main():
 
         # process_query returns a full sorted dictionary
         # key=book title, value=book relevance score
-        book_recs = process_query(emoji_strings, filepath, True, "/Users/isabelle/PycharmProjects/DSAN-5400-emoji-project/emoji_book_rec/data/keyword_book_matrix.tsv")
+        book_recs = process_query(emoji_strings, filepath, True, "emoji_book_rec/data/keyword_book_matrix.tsv")
 
         key_iter = iter(book_recs)
         book1 = next(key_iter, None)

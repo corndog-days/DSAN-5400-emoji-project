@@ -21,7 +21,7 @@ def process_query(query, filepath, use_precomputed=True, matrix_path=None):
 
     # emoji_kw_dict: Dictionary of emojis and associated keywords
     emoji_kw_dict = generate_keyword_dict(filepath)
-
+    print(emoji_kw_dict)
     # book index
     #kw_book_index = create_index(books, emoji_kw_dict)  # build index
 
@@ -35,6 +35,7 @@ def process_query(query, filepath, use_precomputed=True, matrix_path=None):
     keyword_counts = Counter(query_keywords)
 
     # ----------------New logic----------------
+    print(keyword_counts)
 
     if use_precomputed:
 
