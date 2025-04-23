@@ -15,5 +15,4 @@ def generate_keyword_dict(filepath):
                shorttext = parts[0]
                keywords = parts[1:]
                keyword_dict[shorttext] = keywords
-   print(keyword_dict)
-   return
+   return keyword_dict
