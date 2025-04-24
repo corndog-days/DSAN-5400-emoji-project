@@ -147,10 +147,10 @@ def main():
 
     #setting up results page
     results_frame = tk.Frame(f1, background="white")
-    results_label_header = tk.Label(results_frame, text="RESULTS", font=("Arial", 24), bg="white")
-    results_label1 = tk.Label(results_frame, text="Book 1", font=("Arial", 24), bg="white")
-    results_label2 = tk.Label(results_frame, text="Book 2", font=("Arial", 24), bg="white")
-    results_label3 = tk.Label(results_frame, text="Book 3", font=("Arial", 24), bg="white")
+    results_label_header = tk.Label(results_frame, text="RESULTS", fg="black", font=("Arial", 24), bg="white")
+    results_label1 = tk.Label(results_frame, text="Book 1", fg="black", font=("Arial", 24), bg="white", wraplength=500, justify="center")
+    results_label2 = tk.Label(results_frame, text="Book 2", fg="black", font=("Arial", 24), bg="white", wraplength=500, justify="center")
+    results_label3 = tk.Label(results_frame, text="Book 3", fg="black", font=("Arial", 24), bg="white", wraplength=500, justify="center")
     #packing all four labels
     results_label_header.pack(pady=30)
     results_label1.pack(pady=10)
