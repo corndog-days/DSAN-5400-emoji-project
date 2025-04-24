@@ -14,5 +14,10 @@ def generate_keyword_dict(filepath):
            if parts:  # make sure the line is not empty
                shorttext = parts[0]
                keywords = parts[1:]
+
+               #add extra weight to first keyword
+               keywords.append(parts[1])
+               keywords.append(parts[1])
+
                keyword_dict[shorttext] = keywords
    return keyword_dict

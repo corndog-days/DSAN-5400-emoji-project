@@ -84,13 +84,17 @@ def main():
         book1 = next(key_iter, None)
         book2 = next(key_iter, None)
         book3 = next(key_iter, None)
+        book4 = next(key_iter, None)
+        book5 = next(key_iter, None)
 
         #reveal results frame!
         results_frame.pack(fill="both", expand=True)
-        results_label_header.config(text=f"Top 3 books recommended for: {' '.join(emoji_input)}")
+        results_label_header.config(text=f"Top 5 books recommended for: {' '.join(emoji_input)}")
         results_label1.config(text=f"Book 1: {book1}")
         results_label2.config(text=f"Book 2: {book2}")
         results_label3.config(text=f"Book 3: {book3}")
+        results_label4.config(text=f"Book 4: {book4}")
+        results_label5.config(text=f"Book 5: {book5}")
 
 
 #SETTING UP KEYBOARD GUI
@@ -148,14 +152,19 @@ def main():
     #setting up results page
     results_frame = tk.Frame(f1, background="white")
     results_label_header = tk.Label(results_frame, text="RESULTS", fg="black", font=("Arial", 24), bg="white")
-    results_label1 = tk.Label(results_frame, text="Book 1", fg="black", font=("Arial", 24), bg="white", wraplength=500, justify="center")
-    results_label2 = tk.Label(results_frame, text="Book 2", fg="black", font=("Arial", 24), bg="white", wraplength=500, justify="center")
-    results_label3 = tk.Label(results_frame, text="Book 3", fg="black", font=("Arial", 24), bg="white", wraplength=500, justify="center")
-    #packing all four labels
+    results_label1 = tk.Label(results_frame, text="Book 1", fg="black", font=("Arial", 20), bg="white", wraplength=500, justify="center")
+    results_label2 = tk.Label(results_frame, text="Book 2", fg="black", font=("Arial", 20), bg="white", wraplength=500, justify="center")
+    results_label3 = tk.Label(results_frame, text="Book 3", fg="black", font=("Arial", 20), bg="white", wraplength=500, justify="center")
+    results_label4 = tk.Label(results_frame, text="Book 4", fg="black", font=("Arial", 20), bg="white", wraplength=500, justify="center")
+    results_label5 = tk.Label(results_frame, text="Book 5", fg="black", font=("Arial", 20), bg="white", wraplength=500, justify="center")
+
+    #packing all labels
     results_label_header.pack(pady=30)
     results_label1.pack(pady=10)
     results_label2.pack(pady=10)
     results_label3.pack(pady=10)
+    results_label4.pack(pady=10)
+    results_label5.pack(pady=10)
 
 #MAIN LOOP STARTS HERE
     root.mainloop()
