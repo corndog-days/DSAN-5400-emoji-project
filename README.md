@@ -23,16 +23,16 @@ This project takes a new look at the NLP task of information retrieval. We use:
 ## How To Use
 
 ### User Interface:
-1. Launch the GUI.
-2. Select 1 or more emojis from an interactive emoji keyboard.
-3. Submit your emoji "query".
-4. Get a list of recommended books based on how well their descriptions match your emoji's meaning.
+1. Launch the GUI
+2. Select up to 5 emoji from the emoji keyboard
+3. Submit your emoji query
+4. Receive back a list of recommended books based on the emoji input
 
 ### Back-end Flow:
 - Each emoji maps to 5 curated keywords (with the first one weighted more).
 - Book descriptions are indexed into a keyword matrix (supporting synonyms via WordNet).
 - Emoji keywords are matched to the matrix and used to rank books by relevance.
-- A sorted list of recommendations is returned in the GUI.
+- A sorted list of 5 recommendations is returned in the GUI.
 - The software logs messages throughout, which are output to the logging file.
 
 ---
