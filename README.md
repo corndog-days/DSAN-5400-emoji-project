@@ -10,7 +10,7 @@ Final project for Spring 2025 DSAN-5400 by Shivani Ramesh, Lillian Ehrhart, and 
 
 This **Emoji Book Recommender** is a Python-based tool that lets users find books with an emoji query. The driving question behind this project was: How can we create a unique, interesting way to recommend books to the user? 
 
-In some areas, a user might not have fully articulated keywords in mind for a search. One case of that is looking for something new to read! Users might not know exactly what topic they’re looking for, exactly what genre or age range they want, or have a specific title or author in mind. But they tend to have at least light preferences in some of these areas. Our idea is then to experiment with a fun, engaging method of input in a context where precision may not be the goal for the user.
+In some areas, a user might not have fully articulated keywords in mind for a search. One case of that is looking for something new to read! Users might not know exactly what topic they’re looking for, exactly what genre or age range they want, or have a specific title or author in mind. But they tend to have at least light preferences in some of these areas. Our idea, then, is to experiment with a fun, engaging method of input in a context where precision may not be the goal for the user.
 
 This project takes a new look at the NLP task of information retrieval. We use:
 - A manually annotated emoji-to-keyword mapping
