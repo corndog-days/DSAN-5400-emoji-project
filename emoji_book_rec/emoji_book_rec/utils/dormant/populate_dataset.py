@@ -1,3 +1,6 @@
+"""Edit:  we are no longer using API's for data
+Populate a dataset of books based on emoji keywords."""
+
 import pandas as pd
 import emoji
 from api_to_tsv import BookAPI
@@ -26,6 +29,11 @@ def load_emoji_keyword_dict(path="emoji_book_rec/data/emoji_keyword_list.tsv"):
 def populate_dataset(
     emoji_kw_tsv_path="emoji_book_rec/data/emoji_keyword_list.tsv", output_path="emoji_book_rec/data/books_data.tsv"
 ):
+    """
+    Populate a dataset of books based on emoji keywords.
+    :param emoji_kw_tsv_path: Path to the TSV file containing emoji-keyword mappings.
+    :param output_path: Path to save the combined dataset.
+    """
     emoji_kw_dict = load_emoji_keyword_dict(emoji_kw_tsv_path)
     book_api = BookAPI()
 

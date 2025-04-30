@@ -1,3 +1,6 @@
+""" Edit:  we are no longer using API's for data
+This class will save API query search data into a large dataset TSV file"""
+
 import dataclasses
 import pandas as pd
 import requests
@@ -6,6 +9,8 @@ from typing import List
 
 @dataclasses.dataclass
 class Results:
+    """class stores API search results in a dataclass object"""
+
     title: str
     authors: str = ""
     publisher: str = ""
@@ -22,13 +27,18 @@ class Results:
 
 
 class BookAPI:
+    """Class to fetch book data from various APIs and save it to a TSV file."""
+
     def __init__(self):
+        """Initialize the API URLs."""
         self.google_books_url = "https://www.googleapis.com/books/v1/volumes"
         self.open_library_url = "https://openlibrary.org/search.json"
         self.iarchive_url = "https://archive.org/advancedsearch.php"
 
     def google_books_api(self, query: str) -> List[Results]:
-        """Fetch data from Google Books API."""
+        """Fetch data from Google Books API.
+        :param query: Search query string.
+        :return: List of book results."""
         params = {"q": query}
         response = requests.get(self.google_books_url, params=params)
         if not response.text.strip():
@@ -64,7 +74,9 @@ class BookAPI:
         return books
 
     def open_library_api(self, query: str) -> List[Results]:
-        """Fetch data from Open Library API."""
+        """Fetch data from Open Library API.
+        :param query: Search query string.
+        :return: List of book results."""
         params = {"q": query}
         response = requests.get(self.open_library_url, params=params)
 
@@ -97,7 +109,9 @@ class BookAPI:
         return books
 
     def iarchive_api(self, query):
-        """Fetch data from Internet Archive API using a search query."""
+        """Fetch data from Internet Archive API using a search query.
+        :param query: Search query string.
+        :return: List of book results."""
         params = {
             "q": f'title:("{query}")',
             "fl[]": ["title", "creator", "language", "publisher", "description", "date"],
@@ -143,7 +157,9 @@ class BookAPI:
         return books
 
     def get_combined_data(self, query: str) -> pd.DataFrame:
-        """Combine data from both APIs into a single pandas DataFrame."""
+        """Combine data from both APIs into a single pandas DataFrame.
+        :param query: Search query string.
+        :return: DataFrame containing combined book data."""
 
         google_books = self.google_books_api(query)
         open_library_books = self.open_library_api(query)
@@ -157,7 +173,10 @@ class BookAPI:
         return df
 
     def save_to_tsv(self, query: str, filename="books_data.tsv"):
-        """Fetch and save combined book data to a TSV file."""
+        """Fetch and save combined book data to a TSV file.
+        :param query: Search query string.
+        :param filename: Name of the output TSV file.
+        :return: None"""
         df = self.get_combined_data(query)
         df.to_csv(filename, sep="\t", index=False)
         print(f"Saved {len(df)} records to {filename}")
