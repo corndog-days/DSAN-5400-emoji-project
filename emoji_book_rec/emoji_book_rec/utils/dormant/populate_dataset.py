@@ -3,7 +3,8 @@ import emoji
 from api_to_tsv import BookAPI
 import csv
 
-def load_emoji_keyword_dict(path = "emoji_book_rec/data/emoji_keyword_list.tsv"):
+
+def load_emoji_keyword_dict(path="emoji_book_rec/data/emoji_keyword_list.tsv"):
     """
     Loads emoji-keyword mappings from a TSV file.
     :return: Dict[str, List[str]]
@@ -13,15 +14,18 @@ def load_emoji_keyword_dict(path = "emoji_book_rec/data/emoji_keyword_list.tsv")
 
     for index, row in df.iterrows():
         # Remove leading spaces if they exist
-        emoji_name = row['Emoji'].strip()
+        emoji_name = row["Emoji"].strip()
         # Convert emoji name to emoji
-        unicode_emoji = emoji.emojize(f":{emoji_name}:", language='alias')
+        unicode_emoji = emoji.emojize(f":{emoji_name}:", language="alias")
         keywords = [kw.strip() for kw in row[1:].dropna()]
         emoji_kw_dict[unicode_emoji] = keywords
 
     return emoji_kw_dict
 
-def populate_dataset(emoji_kw_tsv_path="emoji_book_rec/data/emoji_keyword_list.tsv", output_path="emoji_book_rec/data/books_data.tsv"):
+
+def populate_dataset(
+    emoji_kw_tsv_path="emoji_book_rec/data/emoji_keyword_list.tsv", output_path="emoji_book_rec/data/books_data.tsv"
+):
     emoji_kw_dict = load_emoji_keyword_dict(emoji_kw_tsv_path)
     book_api = BookAPI()
 
@@ -41,8 +45,9 @@ def populate_dataset(emoji_kw_tsv_path="emoji_book_rec/data/emoji_keyword_list.t
         combined_df = pd.concat([combined_df, new_df], ignore_index=True)
         combined_df.drop_duplicates(subset="title", keep="first", inplace=True)
 
-    combined_df.to_csv(output_path, sep='\t', index=False)
+    combined_df.to_csv(output_path, sep="\t", index=False)
     print(f"\n Saved final dataset with {len(combined_df)} unique books to {output_path}")
+
 
 if __name__ == "__main__":
     populate_dataset()

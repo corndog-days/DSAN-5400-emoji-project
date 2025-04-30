@@ -1,13 +1,18 @@
+"""Create an inverted index of books based on keywords and their synonyms."""
 from collections import defaultdict
 from nltk.corpus import wordnet
 
+
 def get_synonyms(word):
-    """Get a set of synonyms for a word using WordNet."""
+    """Get a set of synonyms for a word using WordNet.
+    :param word: The word to find synonyms for.
+    :return: A set of synonyms for the word."""
     synonyms = set()
     for syn in wordnet.synsets(word):
         for lemma in syn.lemmas():
-            synonyms.add(lemma.name().lower().replace('_', ' '))
+            synonyms.add(lemma.name().lower().replace("_", " "))
     return synonyms
+
 
 def create_index(books, emoji_kw_dict):
     """
