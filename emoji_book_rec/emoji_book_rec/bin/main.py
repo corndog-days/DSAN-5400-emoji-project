@@ -189,11 +189,11 @@ def main():
         # reveal results frame!
         results_frame.pack(fill="both", expand=True)
         results_label_header.config(text=f"Top 5 books recommended for: {' '.join(emoji_input)}")
-        results_label1.config(text=f"Book 1: {book1}")
-        results_label2.config(text=f"Book 2: {book2}")
-        results_label3.config(text=f"Book 3: {book3}")
-        results_label4.config(text=f"Book 4: {book4}")
-        results_label5.config(text=f"Book 5: {book5}")
+        results_label1.config(text=f"Book 1: {book1[0]}")
+        results_label2.config(text=f"Book 2: {book2[0]}")
+        results_label3.config(text=f"Book 3: {book3[0]}")
+        results_label4.config(text=f"Book 4: {book4[0]}")
+        results_label5.config(text=f"Book 5: {book5[0]}")
 
     # SETTING UP KEYBOARD GUI
     f1 = tk.Frame(root, background=bg_color)
