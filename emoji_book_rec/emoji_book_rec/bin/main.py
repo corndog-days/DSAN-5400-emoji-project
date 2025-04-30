@@ -1,5 +1,6 @@
 """Emoji Keyboard GUI for Book Recommendation System
 This module creates a GUI for users to input emojis and get book recommendations based on their selections."""
+
 import emoji
 import tkinter as tk
 from ..utils.query import process_query

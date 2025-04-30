@@ -1,5 +1,6 @@
 """Create a keyword-book matrix from the emoji-keyword mapping and book descriptions.
 This script generates a matrix where each row corresponds to a keyword (or its synonyms)"""
+
 import pandas as pd
 import numpy as np
 from nltk.corpus import wordnet
@@ -10,7 +11,7 @@ def get_synonyms(word):
     :param word: The word to find synonyms for.
     :return: A set of synonyms for the word.
     """
-    
+
     synonyms = set()
     for syn in wordnet.synsets(word):
         for lemma in syn.lemmas():

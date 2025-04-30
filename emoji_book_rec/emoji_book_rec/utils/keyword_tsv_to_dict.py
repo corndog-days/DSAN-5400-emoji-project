@@ -1,5 +1,6 @@
 """This script reads a tab-separated values (TSV) file containing keywords
 and their associated short texts, and converts it into a dictionary."""
+
 # turns keyword tsv file from data folder into a dictionary and returns it
 
 
