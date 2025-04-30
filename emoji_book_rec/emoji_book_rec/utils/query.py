@@ -1,6 +1,7 @@
 """ query.py
     This module contains the function to process emoji queries and return book titles
     based on the keywords associated with the emojis."""
+
 from collections import Counter
 import pandas as pd
 

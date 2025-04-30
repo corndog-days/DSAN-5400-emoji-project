@@ -1,4 +1,5 @@
 """Create an inverted index of books based on keywords and their synonyms."""
+
 from collections import defaultdict
 from nltk.corpus import wordnet
 
