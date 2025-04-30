@@ -9,6 +9,7 @@ from typing import Dict, List, Tuple
 @dataclasses.dataclass
 class Book:
     """Class representing book information"""
+
     title: str
     authors: str = ""
     publisher: str = ""
@@ -23,25 +24,29 @@ class Book:
     def to_dict(self):
         return dataclasses.asdict(self)
 
+
 class DocIterator(abc.ABC, collections.abc.Iterator):
     def __str__(self):
         return self.__class__.__name__
-    
+
+
 class TsvIterator(DocIterator):
     """Iterator to iterate over tsv-formatted documents"""
+
     def __init__(self, path):
         self.path = path
         self.fp = open(self.path)
-        self.reader = csv.reader(self.fp, delimiter='\t')
-        next(self.reader) # skip first row
+        self.reader = csv.reader(self.fp, delimiter="\t")
+        next(self.reader)  # skip first row
 
     def __iter__(self):
         return self
+
     def __next__(self):
         try:
             row = next(self.reader)
-            #print(Comparison(row[0], row[1], row[2]))
-            #true_label = float(row[2])
+            # print(Comparison(row[0], row[1], row[2]))
+            # true_label = float(row[2])
             return Book(
                 title=row.get("title", ""),
                 authors=row.get("authors", ""),
@@ -52,7 +57,7 @@ class TsvIterator(DocIterator):
                 categories=row.get("categories", ""),
                 averageRating=float(row.get("averageRating", 0)) if row.get("averageRating") else None,
                 ratingsCount=int(row.get("ratingsCount", 0)) if row.get("ratingsCount") else None,
-                language=row.get("language", "")
+                language=row.get("language", ""),
             )
         except StopIteration:
             self.fp.close()
@@ -69,20 +74,23 @@ def get_top_books_from_scores(scores: List[Tuple[str, int]], books: List[Results
     for title, _ in scores[:top_n]:
         if title in title_to_book:
             book = title_to_book[title]
-            selected_books.append(Book(
-                title=book.title,
-                authors=book.authors,
-                publisher=book.publisher,
-                publishedDate=book.publishedDate,
-                description=book.description,
-                pageCount=book.pageCount,
-                categories=book.categories,
-                averageRating=book.averageRating,
-                ratingsCount=book.ratingsCount,
-                language=book.language
-            ))
+            selected_books.append(
+                Book(
+                    title=book.title,
+                    authors=book.authors,
+                    publisher=book.publisher,
+                    publishedDate=book.publishedDate,
+                    description=book.description,
+                    pageCount=book.pageCount,
+                    categories=book.categories,
+                    averageRating=book.averageRating,
+                    ratingsCount=book.ratingsCount,
+                    language=book.language,
+                )
+            )
 
     return selected_books
+
 
 def save_books_to_tsv(books: List[Book], filename: str = "selected_sorted_books.tsv"):
     """
@@ -92,8 +100,8 @@ def save_books_to_tsv(books: List[Book], filename: str = "selected_sorted_books.
         print("No books to save.")
         return
 
-    with open(filename, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.writer(f, delimiter='\t')
+    with open(filename, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f, delimiter="\t")
         headers = books[0].__dataclass_fields__.keys()
         writer.writerow(headers)
 
