@@ -167,7 +167,7 @@ def main():
         emoji_input.clear()
         return
 
-    # THIS IS THE METHOD OF MAIN WHICH CONNECTS TO THE REST OF THE PIPELINE
+# THIS IS THE METHOD OF MAIN WHICH CONNECTS TO THE REST OF THE PIPELINE
     def submit_click():
         """Handle submit button click."""
         # error handling
