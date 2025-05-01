@@ -7,6 +7,7 @@ from nltk.corpus import wordnet
 import argparse
 import gdown
 import zipfile
+import os
 
 parser = argparse.ArgumentParser(description="Create keyword-book matrix")
 parser.add_argument("-f", "--filepath", required=False, help="Path to user dataset", default=None)
