@@ -22,6 +22,10 @@ This project takes a new look at the NLP task of information retrieval. We use:
 
 ## How To Use
 
+### Generating Keyword-Book Matrix:
+Note: This should be done before running main. 
+Run emoji_book_rec/emoji_book_rec/utils/create_kw_book_tsv.py. The file contains an optional argument, "filepath," which allows the user to use their own dataset. If none is specified, a default from Kaggle will be used. 
+
 ### User Interface:
 1. Launch the GUI
 2. Select up to 5 emoji from the emoji keyboard (you can use multiple of any emoji to weight your search more to that emoji!)

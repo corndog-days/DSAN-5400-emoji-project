@@ -4,27 +4,12 @@ This module creates a GUI for users to input emojis and get book recommendations
 import emoji
 import tkinter as tk
 from ..utils.query import process_query
-import argparse
-import gdown
-import zipfile
 import os
 
 
 def main():
     """Main function to run the Emoji Keyboard GUI."""
     # main ideas from https://www.youtube.com/watch?v=8Tlqb14NvY8
-
-    # download and unzip dataset if not already in data folder
-    url = "https://drive.google.com/file/d/1Ai0rmMPnyJHcP1bTdFm0T89-UMJ3uOK_/view?usp=sharing"
-    zip_path = "data.zip"
-    extract_dir = "data/"
-
-    if not os.path.exists(zip_path):
-        gdown.download(url, zip_path, quiet=False)
-
-    if not os.path.exists(extract_dir):
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(extract_dir)
 
     emoji_names = [
         "grinning_face",
