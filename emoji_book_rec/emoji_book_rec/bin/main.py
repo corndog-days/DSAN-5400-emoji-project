@@ -5,12 +5,26 @@ import emoji
 import tkinter as tk
 from ..utils.query import process_query
 import argparse
+import gdown
+import zipfile
 import os
 
 
 def main():
     """Main function to run the Emoji Keyboard GUI."""
     # main ideas from https://www.youtube.com/watch?v=8Tlqb14NvY8
+
+    # download and unzip dataset if not already in data folder
+    url = "https://drive.google.com/file/d/1Ai0rmMPnyJHcP1bTdFm0T89-UMJ3uOK_/view?usp=sharing"
+    zip_path = "data.zip"
+    extract_dir = "data/"
+
+    if not os.path.exists(zip_path):
+        gdown.download(url, zip_path, quiet=False)
+
+    if not os.path.exists(extract_dir):
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(extract_dir)
 
     emoji_names = [
         "grinning_face",
@@ -153,10 +167,17 @@ def main():
         emoji_input.clear()
         return
 
-    ##Need to add error handling for if the user enters too many emoji
     # THIS IS THE METHOD OF MAIN WHICH CONNECTS TO THE REST OF THE PIPELINE
     def submit_click():
         """Handle submit button click."""
+        # error handling
+        if not emoji_input:
+            text_var.set("Please enter at least one emoji. Hit \"Clear\" to reset.")
+            return
+        if len(emoji_input) > 5:
+            text_var.set("Please enter no more than 5 emojis. Hit \"Clear\" to reset.")
+            return
+
         text_var.set("SUBMITTED")
         print("Submitted emoji input:", emoji_input)
 
@@ -172,8 +193,6 @@ def main():
             short_text = emoji.demojize(e)
             # remove colons on either side
             emoji_strings.append(short_text[1:-1])
-        # the print statement is purely to test
-        # print(emoji_strings)
 
         # process_query returns a full sorted dictionary
         # key=book title, value=book relevance score
